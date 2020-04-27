@@ -3,21 +3,37 @@ const menuBtn = document.querySelector('.menu-btn');
 const nav = document.querySelector('nav');
 const $logo = $('.myLogo');
 const $button = $('.driverBtn');
+const $window = $(window);
 let menuActive = false;
 
 menuBtn.addEventListener('click', (e) =>
 {
    if(!menuActive)
    {
-      $logo.hide();
-      $button.hide();
-      menuBtn.classList.add('open');
-      nav.classList.add('active');
-      menuActive = true;
-      e.preventDefault();
+      if ($window.height() < 361)
+      {
+         $content.hide();
+         $logo.hide();
+         $button.hide();
+         menuBtn.classList.add('open');
+         nav.classList.add('active');
+         menuActive = true;
+         e.preventDefault();
+      }
+      else
+      {
+         $logo.hide();
+         $button.hide();
+         menuBtn.classList.add('open');
+         nav.classList.add('active');
+         menuActive = true;
+         e.preventDefault();
+      }
+
    }
    else
    {  
+      $content.fadeIn(800);
       $logo.fadeIn(800);
       $button.fadeIn(800);
       menuBtn.classList.remove('open');
@@ -36,6 +52,7 @@ let contentActive = false;
 var height = $(window).height();
 var $footer = $('.footer');
 
+
 checkHeight(); // initialize function
 $(window).resize(function()
 {
@@ -50,7 +67,7 @@ function checkHeight(e)
    if (height < 850)
    {
 
-      $content.on('click', () =>
+      $content.on('click', (e) =>
       {
 
          menuBtn.classList.remove('open'); // Remove active menu when 
@@ -104,3 +121,4 @@ function upOrDown()
       $driverBtn.removeClass('active');
    }
 }
+
