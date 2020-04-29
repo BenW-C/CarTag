@@ -43,82 +43,74 @@ menuBtn.addEventListener('click', (e) =>
    }
 });
 
-// VARIABLES FOR CONTENT MANIPULATION
-var content = document.querySelector('.content');
+// JS FOR CONTENT
+var $height = $window.height();
+var $scrollPos = $window.scrollTop();
 var $content = $('.content');
-const $menuBtn = $('.menu-btn');
-const $nav = $('nav');
-let contentActive = false;
-var height = $(window).height();
-var $footer = $('.footer');
+var $menuBtn = $('.menu-btn');
+var $nav = $('nav');
+var contentActive = false;
+var $footer = $('footer');
 
-
-checkHeight(); // initialize function
-$(window).resize(function()
+$window.resize(() => 
 {
    $footer.hide();
-   height = $(window).height();  // on resize get new height + call function
-   checkHeight();
+   $height = $window.height();                // Get height on resize
 });
 
-function checkHeight(e) 
+$window.scroll(() => 
 {
-   $footer.show();
-   if (height < 850)
+   $scrollPos = $window.scrollTop();          // Get position of scroll for footer
+   if ($scrollPos > 0)
    {
+      showScreen();
+      $content.removeClass('swipeUp');
+   }   
+});
 
-      $content.on('click', (e) =>
+toggleContent();                                   // Check everything
+function toggleContent()
+{
+   if ($height < 900)    // Add click event when smaller screen
+   {
+      $content.click(() =>
       {
+         $menuBtn.removeClass('open');    // Remove active menu when 
+         $nav.removeClass('active');      // clicking on content
 
-         menuBtn.classList.remove('open'); // Remove active menu when 
-         nav.classList.remove('active'); // clicking on content
-         if (!contentActive)
+         if (!contentActive && $scrollPos >= 0)
          {
-            $nav.hide();
-            $logo.hide();
-            $menuBtn.hide();
-            $button.hide();
-            content.classList.add('swipeUp');
             contentActive = true;
-            e.preventDefault(); // Needed so elements don't fade back in 
+            clearScreen();
+            $content.addClass('swipeUp');
+            $window.scrollTop(0);           // Show content instead of footer
          }
          else
          {
-            $nav.fadeIn(800);
-            $logo.fadeIn(800);
-            $menuBtn.fadeIn(800);
-            $button.fadeIn(800);
-            content.classList.remove('swipeUp');
-            contentActive = false;
-            e.preventDefault(); // Needed so elements don't fade back in
+            $content.removeClass('swipeUp');
+            contentActive = false;       
+            showScreen();            
          }
-      })
+      });
    }
    else
    {
-      $content.off(); // remove click event from content
+      $content.off();                          // Remove click event when screen is bigger
    }
 }
 
-// FOOTER
-var $driverBtn = $('.driverBtn');
-
-$(window).scroll(() =>
+function clearScreen()                        // Show items
 {
-   upOrDown();
-});
-
-function upOrDown()
+   $nav.hide();
+   $logo.hide();
+   $menuBtn.hide();
+   $button.hide();
+}
+function showScreen()                         // Hide items
 {
-   if ($(this).scrollTop() == 250)
-   {
-      $driverBtn.addClass('active');
-      $logo.fadeOut(800);
-   }
-   else
-   {
-      $logo.fadeIn(800);
-      $driverBtn.removeClass('active');
-   }
+   $nav.fadeIn(400);
+   $logo.fadeIn(400);
+   $menuBtn.fadeIn(400);
+   $button.fadeIn(400);
 }
 
