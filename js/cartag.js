@@ -10,7 +10,7 @@ menuBtn.addEventListener('click', (e) =>
 {
    if(!menuActive)
    {
-      if ($window.height() < 361)
+      if ($window.height() < 600 || $window.width() < 812)
       {
          $content.hide();
          $logo.hide();
@@ -45,22 +45,29 @@ menuBtn.addEventListener('click', (e) =>
 
 // JS FOR CONTENT
 var $height = $window.height();
+var $width = $window.width();
 var $scrollPos = $window.scrollTop();
 var $content = $('.content');
 var $menuBtn = $('.menu-btn');
 var $nav = $('nav');
 var contentActive = false;
 var $footer = $('footer');
+var width = document.querySelector('.width');
+
 
 $window.resize(() => 
 {
+   width.textContent = $window.height();
    $footer.hide();
    $height = $window.height();                // Get height on resize
+   $width = $window.width();
 });
 
 $window.scroll(() => 
-{
+{  
    $scrollPos = $window.scrollTop();          // Get position of scroll for footer
+   $height = $window.height();                // Get height on resize
+   $width = $window.width();
    if ($scrollPos > 0)
    {
       showScreen();
@@ -71,7 +78,7 @@ $window.scroll(() =>
 toggleContent();                                   // Check everything
 function toggleContent()
 {
-   if ($height < 900)    // Add click event when smaller screen
+   if ($height < 900 || $width < 1200)    // Add click event when smaller screen
    {
       $content.click(() =>
       {

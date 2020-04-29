@@ -25,6 +25,104 @@ $transition: all 0.4s ease-in-out;
     align-items: center;
     text-align: center;
 }
+@mixin navButton()
+{
+    /*Navigation Bar*/
+nav
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    opacity: 0;
+}
+.nav-links
+{
+    flex-direction: column;
+    background-color: black;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    position: relative;
+    li
+    {
+        margin-top: 50px;
+
+        a:hover
+        {
+            color: $maincolor;
+        }
+    }
+}
+#language
+{
+    position: absolute;
+    top: 3%;
+    left: 20px
+}
+.active
+{
+    transition: all .5s ease-in-out;
+    opacity: 0.8;
+}
+
+/*Menu Button*/
+.menu-btn
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include setPos($position:absolute,$top:null, $right:20px, $bottom:null, $left:null);
+    transition: $transition;
+    cursor: pointer;
+    min-height: 1vh;
+    width: 80px;
+    height: 80px;
+}
+.menu-btn-line
+{
+    width: 30px;
+    height: 3px;
+    margin: 8px;
+    border-radius: 5px;
+    background-color: $maincolor;
+    transition: all .5s ease-in-out;
+}
+.menu-btn-line::before,
+.menu-btn-line::after
+{
+    background-color: $maincolor;
+    transition: $transition;
+    position: absolute;
+    content: '';
+    width: 30px;
+    height: 3px;
+    border-radius: 4px;
+}
+.menu-btn-line::before
+{
+    transform: translateY(-10px);
+}
+.menu-btn-line::after
+{
+    transform: translateY(10px);
+}
+.menu-btn.open .menu-btn-line
+{
+    transform: translateX(-50px);
+    background: transparent;
+}
+.menu-btn.open .menu-btn-line::before
+{
+    transform: rotate(45deg) translate(35px,-35px);
+} 
+.menu-btn.open .menu-btn-line::after
+{
+    transform: rotate(-45deg) translate(35px, 35px);
+}
+
+}
 /*Global Styles*/
 *
 {
@@ -143,17 +241,15 @@ nav
     @include setPos($position:absolute,$top:null, $right:null, $bottom:0,$left:null);
     background-color: rgba(5, 224, 228,0.623);
     width: 100%;
-   
-
+    
+    main
+    {
+        width: 80%;
+    }
     h1
     {
         font-size: 40px;
         letter-spacing: 4px;
-    }
-    .container
-    {
-        width: 80%;
-        margin: 0 auto;
     }
     article
     {
@@ -161,6 +257,22 @@ nav
         font-size: 25px;
         letter-spacing: 5px;
     }
+}
+.content.swipeUp
+{
+    transition: $transition;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    bottom: 0;
+}
+.content.swipeUp main
+{
+    width: 50%;
+}
+.content.swipeUp article
+{
+    opacity: 1;
 }
 main
 {
@@ -220,15 +332,6 @@ h4
     color: $maincolor;
 }
 
-/*Scalability*/
-@media screen and (max-width: 1024px)
-{
-    .nav-links
-    {
-        width: 70%;
-    }
-}
-
 @media screen and (max-height: 850px)
 {  
     .driverBtn
@@ -251,127 +354,12 @@ h4
         cursor: pointer;
         padding-top: 0px;
     }
-    .content.swipeUp
-    {
-        transition: $transition;
-        align-items: center;
-        position: absolute;
-        height: 100%;
-        bottom: 0;
-    }
-    .content.swipeUp main
-    {
-        width: 50%;
-    }
-    .content.swipeUp article
-    {
-        opacity: 1;
-    }
 }
 /*WIDTH --Phones--*/
-@media screen and (max-width: 768px)
+@media screen and (max-width: 812px)
 {
 
-/*Navigation Bar*/
-body
-{
-    overflow-x: hidden;
-}
-nav
-{
-   
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    justify-content: flex-start;
-    opacity: 0;
-}
-.nav-links
-{
-    flex-direction: column;
-    background-color: black;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    justify-content: flex-start;
-    position: relative;
-
-    li
-    {
-        margin-top: 50px;
-
-        a:hover
-        {
-            color: $maincolor;
-        }
-    }
-}
-#language
-{
-    position: absolute;
-    top: 3%;
-}
-.active
-{
-    transition: all .5s ease-in-out;
-    opacity: 0.8;
-}
-
-/*Menu Button*/
-.menu-btn
-{
-    /*z-index: 5;*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @include setPos($position:absolute,$top:null, $right:20px, $bottom:null, $left:null);
-    transition: $transition;
-    cursor: pointer;
-    min-height: 1vh;
-    width: 80px;
-    height: 80px;
-}
-.menu-btn-line
-{
-    width: 30px;
-    height: 3px;
-    margin: 8px;
-    border-radius: 5px;
-    background-color: $maincolor;
-    transition: all .5s ease-in-out;
-}
-.menu-btn-line::before,
-.menu-btn-line::after
-{
-    background-color: $maincolor;
-    transition: $transition;
-    position: absolute;
-    content: '';
-    width: 30px;
-    height: 3px;
-    border-radius: 4px;
-}
-.menu-btn-line::before
-{
-    transform: translateY(-10px);
-}
-.menu-btn-line::after
-{
-    transform: translateY(10px);
-}
-.menu-btn.open .menu-btn-line
-{
-    transform: translateX(-50px);
-    background: transparent;
-}
-.menu-btn.open .menu-btn-line::before
-{
-    transform: rotate(45deg) translate(35px,-35px);
-} 
-.menu-btn.open .menu-btn-line::after
-{
-    transform: rotate(-45deg) translate(35px, 35px);
-}
+@include navButton();
 
 /*The Content*/
 .content
@@ -417,8 +405,9 @@ main
 }
 }
 
-@media screen and (max-height: 420px)
+@media screen and (max-height: 600px)
 {
+    @include navButton();
     .myLogo>img
     {
         top: 0px;
@@ -426,7 +415,6 @@ main
     .driverBtn
     {
         width: 200px;
-        
         a
         {
             font-size: 14px;
@@ -435,13 +423,82 @@ main
     .content
     {
         height: 80px;
+        main
+        {
+            margin: 10px;
+        }
         h1
         {
-            font-size: 16px;
+            font-size: 20px;
+        }
+        article
+            {
+                width: 150%;
+                position: relative;
+                left: -25%;
+                font-size: 17px;
+            }
+    }
+}
+
+@media screen and (max-width: 420px)
+{
+    .myLogo > img
+    {
+        top: 10%;
+    }
+    .driverBtn
+    {
+        width: 200px;
+        padding: 20px 5px;
+        a
+        {
+            font-size: 14px;
         }
     }
-    .nav-links li
+    .content
     {
-        margin-top: 30px;
+        height: 80px;
+        main
+        {
+            h1
+            {
+                width: 150%;
+                position: relative;
+                left: -25%;
+                font-size: 17px;
+            }
+            article
+            {
+                width: 150%;
+                position: relative;
+                left: -25%;
+                font-size: 17px;
+            }
+        }
+    }
+    .footer
+    {      
+        align-items: flex-start;
+        padding-top: 40px;  
+    }
+
+    .logos
+    {
+        width: 40%;
+
+        img
+        {
+            width: 150px;
+        }
+        .links
+        {
+            img
+            {
+                width: 40px;
+                margin-top: 10px;
+                padding-right: 10px;
+            }
+        }
     }
 }
