@@ -5,8 +5,9 @@ const $logo = $('.myLogo');
 const $button = $('.driverBtn');
 const $window = $(window);
 let menuActive = false;
+const $langBtn = $('.language');
 
-menuBtn.addEventListener('click', (e) =>
+menuBtn.addEventListener('click', () =>
 {
    if(!menuActive)
    {
@@ -15,31 +16,31 @@ menuBtn.addEventListener('click', (e) =>
          $content.hide();
          $logo.hide();
          $button.hide();
+         $langBtn.hide();
          menuBtn.classList.add('open');
          nav.classList.add('active');
          menuActive = true;
-         e.preventDefault();
       }
       else
       {
          $logo.hide();
          $button.hide();
+         $langBtn.hide();
          menuBtn.classList.add('open');
          nav.classList.add('active');
          menuActive = true;
-         e.preventDefault();
       }
 
    }
    else
    {  
+      $langBtn.fadeIn(800);
       $content.fadeIn(800);
       $logo.fadeIn(800);
       $button.fadeIn(800);
       menuBtn.classList.remove('open');
       nav.classList.remove('active');
       menuActive = false;     
-      e.preventDefault();
    }
 });
 
@@ -52,12 +53,9 @@ var $menuBtn = $('.menu-btn');
 var $nav = $('nav');
 var contentActive = false;
 var $footer = $('footer');
-var width = document.querySelector('.width');
-
 
 $window.resize(() => 
 {
-   width.textContent = $window.height();
    $footer.hide();
    $height = $window.height();                // Get height on resize
    $width = $window.width();
@@ -71,8 +69,19 @@ $window.scroll(() =>
    if ($scrollPos > 0)
    {
       showScreen();
-      $content.removeClass('swipeUp');
-   }   
+      $content.removeClass('swipeUp');       // remove both active menus when scrolling down
+      nav.classList.remove('active');
+      menuBtn.classList.remove('open');
+      $content.fadeIn(800);
+   }
+   if ($scrollPos == 250)
+   {
+      $button.addClass('active');
+   }
+   else
+   {
+      $button.removeClass('active');
+   }  
 });
 
 toggleContent();                                   // Check everything
@@ -108,6 +117,7 @@ function toggleContent()
 
 function clearScreen()                        // Show items
 {
+   $langBtn.hide();
    $nav.hide();
    $logo.hide();
    $menuBtn.hide();
@@ -115,6 +125,7 @@ function clearScreen()                        // Show items
 }
 function showScreen()                         // Hide items
 {
+   $langBtn.fadeIn(400);
    $nav.fadeIn(400);
    $logo.fadeIn(400);
    $menuBtn.fadeIn(400);
