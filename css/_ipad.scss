@@ -1,0 +1,102 @@
+/* ------ FOR INDEX.HTML ------*/
+
+/*Ipad*/
+@media only screen and (min-width: 768px) and (max-height: 1024px) and (min-height: 420px)
+{
+    /*Language Select Dropdown*/
+    #language
+    {
+        width: 8%;
+        height: 50px;
+        font-size: 18px;
+    }
+    /*The Logo*/
+    .myLogo
+    {
+        img
+        {
+            top: 15%;
+            width: 50%;
+        }
+    }
+}
+
+/*Ipad Pro*/
+@media only screen and (min-width: 1024px) and (min-height: 1366px)
+{
+    /*Navigation Bar*/
+    .nav-links
+    {
+        li
+        {
+            a
+            {        
+                font-size: 40px;
+                line-height: 120px;
+            }
+        }
+    }
+    .menu-btn-line
+    {
+        width: 50px;
+        height: 5px;
+    }
+    .menu-btn-line::before,
+    .menu-btn-line::after
+    {
+        width: 50px;
+        height: 5px;
+    }
+    .menu-btn-line::before
+    {
+        transform: translateY(-15px);
+    }
+    .menu-btn-line::after
+    {
+        transform: translateY(15px);
+    }
+    
+    /*The Logo*/
+    .myLogo
+    {
+        img
+        {
+            width: 800px;
+        }
+    }
+    /*The Become Driver Button*/
+    .driverBtn
+    {
+        width: 400px;
+        a
+        {
+            font-size: 30px;   
+        }
+    }
+    .driverBtn.active>a
+    { 
+        animation: none;
+    }
+
+    /*Description of cartag*/
+    .content
+    {
+        height: initial;
+
+        main
+        {
+            font-size: 30px;
+            width: 85%;
+            h1
+            {
+                font-size: 45px;
+            }
+            .line
+            {
+                width: 60px;
+                height: 7px;
+            }
+        }
+    }
+
+}

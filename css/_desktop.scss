@@ -1,0 +1,61 @@
+@import 'global';
+@import 'mixins';
+
+/*Small Desktop*/
+@media only screen and (min-width: 1200px)
+{
+    /*Navigation Bar*/
+    nav
+    {
+        opacity: initial;
+        visibility: visible;
+        min-height: 10vh;
+        
+    }
+    .nav-links
+    {
+        background-color: initial;
+        flex-direction: initial;
+        justify-content: space-around;
+        width: 60%;
+        list-style: none;
+        li
+        {
+            
+            left: 9%;
+            top: 7%;
+            a
+            {   
+                opacity: initial;     
+                font-size: 20px;
+                line-height: 60px;
+                &:hover
+                {
+                    color: $maincolor;
+                }
+            }
+        }
+    }
+    .menu-btn
+    {
+        visibility: hidden;
+    }
+
+    /*Language Select Dropdown*/
+    #language
+    {
+        font-size: 20px;
+    }
+
+    /*The Logo*/
+    .myLogo
+    {
+        img
+        {
+            @include setPos($position:absolute,$top:15%, $right:null, $left:50%, $bottom: null);
+            transform: translate(-50%);
+            width: 50%;
+        }
+    }
+
+}

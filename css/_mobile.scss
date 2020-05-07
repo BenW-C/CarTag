@@ -1,0 +1,312 @@
+@import 'global';
+@import 'mixins';
+/*Navigation Bar*/
+nav
+{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+}
+.nav-links
+{
+    background-color: black;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    li
+    {
+        position: relative;
+        top: 8%;
+        a
+        {        
+            transition: $transition;
+            color: $whitecolor;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 18px;
+            line-height: 60px;
+            &:hover
+            {
+                color: $maincolor;
+            }
+        }
+    }
+}
+.active
+{
+    visibility: visible;
+    transition: $transition;
+    opacity: 0.8;
+}
+.menu-btn
+{
+    @include setPos($position:absolute,$top:9%, $right:null, $bottom:null, $left:6%);
+    -webkit-tap-highlight-color: transparent; /*Remove Click background*/
+    transition: $transition;
+    cursor: pointer;
+    min-height: 1vh;
+}
+.menu-btn-line
+{
+    background-color: $maincolor;
+    transition: $transition;
+    width: 30px;
+    height: 3px;
+    margin: 8px;
+    border-radius: 5px;
+}
+.menu-btn-line::before,
+.menu-btn-line::after
+{
+    background-color: $maincolor;
+    transition: $transition;
+    position: absolute;
+    content: '';
+    width: 30px;
+    height: 3px;
+    border-radius: 5px;
+}
+.menu-btn-line::before
+{
+    transform: translateY(-11px);
+}
+.menu-btn-line::after
+{
+    transform: translateY(11px);
+}
+.menu-btn.open .menu-btn-line
+{
+    transform: translateX(-50px);
+    background: transparent;
+}
+.menu-btn.open .menu-btn-line::before
+{
+    transform: rotate(45deg) translate(35px,-35px);
+} 
+.menu-btn.open .menu-btn-line::after
+{
+    transform: rotate(-45deg) translate(35px, 35px);
+}
+
+/*Language Select Dropdown*/
+#language
+{
+    @include setPos($position:absolute,$top:8.5%, $right:7%, $bottom:null, $left:null);
+    background-color: $maincolor;
+    color: $blackcolor;
+    font-size: 16px;
+    line-height: 1;
+    border: none;
+    border-radius: 25px;
+    height: 34px;
+    position: absolute;
+    cursor: pointer;
+}
+
+/*The Logo*/
+.myLogo
+{
+    img
+    {
+        @include setPos($position:absolute,$top:15%, $right:null, $left:50%, $bottom: null);
+        transform: translate(-50%);
+        width: 100%;
+    }
+}
+
+/*The Become Driver Button*/
+.driverBtn
+{
+    @include setPos($position:absolute,$top:55%,$right:null,$left:50%, $bottom: null);
+    transition: $transition;
+    background-color: $maincolor;
+    transform: translate(-50%);
+    padding: 20px 5px;
+    width: 200px;
+    border-radius: 25px;
+    border: none;
+
+    a
+    {
+        color: $whitecolor;
+        text-decoration: none;
+        font-weight: 900;
+        transition: $transition;
+        font-size: 14px;
+        &:hover
+        {
+            color: $blackcolor;
+        }
+    }
+}
+.driverBtn.active>a
+{ 
+    animation: pulse 3s cubic-bezier(0.66,0.67,0.83,0.99) infinite;
+}
+@keyframes pulse
+{
+    10%
+    {
+        font-size: 15px;
+    }
+
+    30%
+    {
+        font-size: 16px;
+    }
+    50%
+    {
+        font-size: 17px; 
+    }
+    70%
+    {
+        font-size: 16px; 
+    }
+    90%
+    {
+        font-size: 15px; 
+    }
+    100%
+    {
+        font-size: 14px; 
+    }
+    
+}
+
+/*The Description of CarTag*/
+.content
+{
+    @include setPos($position:absolute,$top:null, $right:null, $bottom:0%,$left:null);
+    background-color: rgba(5, 224, 228,0.8);
+    transition: $transition;
+    height: 80px;
+    width: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    
+    main
+    {
+        @include setPos($position:relative,$top:null, $right:50%,$bottom:null, $left:50%);
+        transform: translate(-50%);
+        color: $whitecolor;
+        text-align: center;
+        font-weight: 900;
+        margin: 10px 0;
+        font-weight: 900;
+        h1
+        {
+            font-size: 20px;
+        }
+        .line
+        {
+            @include setPos($position:relative,$top:null,$right:50%,$bottom:0, $left:50%);
+            transform: translate(-50%); 
+            background-color: $whitecolor;
+            width: 40px;
+            height: 4px;
+            margin: 20px 0px 20px 0px;
+        }
+    }
+}
+.content.swipeUp
+{
+    transition: $transition;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+
+    main
+    {
+        h1
+        {
+            font-size: 28px;
+        }
+    }
+    article
+    {
+        visibility: visible;
+        line-height: 18px;
+        letter-spacing: 3px;
+    }
+}
+
+/*The Footer*/
+.footer
+{
+    @include setPos($position:absolute,$top:null, $right:null, $bottom:-250px, $left:null);
+    color: $whitecolor;
+    background-color: $blackcolor;
+    transition: $transition;
+    opacity: 0.9;
+    padding-top: 10px;
+    height: 250px;
+    width: 100%;
+    display: flex;
+
+    .information
+    {
+        font-size: 14px;
+        width: 20%;
+    }
+    .logos
+    {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 60%;
+
+        img
+        {
+            width: 180px;
+        }
+        .links
+        {   
+            position: absolute;
+            bottom: 18px;  
+            img
+            {
+                margin: 0px 3px;
+                width: 50px;
+            }
+        }
+    }
+    .workingHours
+    {
+        font-size: 15px;
+        width: 20%;
+        h4
+        {
+            color: $maincolor;
+        }
+    }
+}
+
+/* Mobile Landscape*/ 
+@media only screen and (min-width: 480px) and (max-width: 812px) and (max-height: 420px)
+{
+    .nav-links
+    {
+        li
+        {
+            top: 5%;
+            a
+            {        
+                line-height: 50px;
+            }
+        }
+    }
+
+    /*The Logo*/
+    .myLogo
+    {
+        img
+        {
+            top: 2%;
+            width: 45%;
+        }
+    }
+}
+

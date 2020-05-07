@@ -1,0 +1,13 @@
+$maincolor:  rgb(5, 224, 228);
+$blackcolor: black;
+$whitecolor: rgb(255, 255, 255);
+$transition: all 0.4s ease-in-out;
+
+@mixin setPos($position,$top, $right, $bottom, $left)
+{
+   position: $position;
+   top: $top;
+   right: $right;
+   bottom: $bottom;
+   left: $left; 
+}
